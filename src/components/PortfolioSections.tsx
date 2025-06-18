@@ -1,12 +1,11 @@
-import { useState } from 'react'
 
 interface Project {
-  id: number
-  title: string
-  description: string
-  tech: string[]
-  image: string
-  link: string
+  id: number;
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  link: string;
 }
 
 const projects: Project[] = [
@@ -16,7 +15,7 @@ const projects: Project[] = [
     description: "An interactive 3D portfolio built with React Three Fiber and TypeScript",
     tech: ["React", "Three.js", "TypeScript", "Tailwind CSS"],
     image: "/api/placeholder/400/300",
-    link: "#"
+    link: "#",
   },
   {
     id: 2,
@@ -24,7 +23,7 @@ const projects: Project[] = [
     description: "Full-stack e-commerce solution with modern UI/UX",
     tech: ["Next.js", "MongoDB", "Stripe", "Tailwind CSS"],
     image: "/api/placeholder/400/300",
-    link: "#"
+    link: "#",
   },
   {
     id: 3,
@@ -32,171 +31,161 @@ const projects: Project[] = [
     description: "Cross-platform mobile application with real-time features",
     tech: ["React Native", "Firebase", "Redux", "TypeScript"],
     image: "/api/placeholder/400/300",
-    link: "#"
-  }
-]
+    link: "#",
+  },
+];
 
 function PortfolioSections() {
-  const [activeSection, setActiveSection] = useState('about')
-
   return (
-    <div className="fixed inset-0 pointer-events-none z-10">
+    <div className="min-h-screen  text-gray-100">
       {/* Navigation */}
-      <nav className="absolute top-6 left-6 pointer-events-auto">
-        <div className="bg-black/20 backdrop-blur-md rounded-lg p-4">
-          <div className="flex flex-col space-y-2">
-            {['about', 'projects', 'skills', 'contact'].map((section) => (
-              <button
+      <nav className="sticky top-0 z-50 bg-gray-800/95 backdrop-blur-md border-b border-gray-700">
+        <div className="max-w-4xl mx-auto px-6 py-4">
+          <div className="flex space-x-6">
+            {["about", "projects", "skills", "contact"].map((section) => (
+              <a
                 key={section}
-                onClick={() => setActiveSection(section)}
-                className={`px-4 py-2 rounded-md transition-all duration-300 ${
-                  activeSection === section
-                    ? 'bg-white text-black'
-                    : 'text-white hover:bg-white/20'
-                }`}
+                href={`#${section}`}
+                className="px-4 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
+              </a>
             ))}
           </div>
         </div>
       </nav>
 
-      {/* Content Panels */}
-      <div className="absolute top-6 right-6 w-96 pointer-events-auto">
-        <div className="bg-black/20 backdrop-blur-md rounded-lg p-6 text-white">
-          {activeSection === 'about' && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">About Me</h2>
-              <p className="text-gray-200 leading-relaxed">
-                I'm a passionate full-stack developer with expertise in modern web technologies. 
-                I love creating immersive digital experiences that combine functionality with 
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 py-12 space-y-20">
+        {/* About Section */}
+        <section id="about" className="min-h-screen flex items-center">
+          <div className="w-full">
+            <h2 className="text-4xl font-bold mb-8 text-white">About Me</h2>
+            <div className="bg-gray-800/50 backdrop-blur-md rounded-lg p-8 border border-gray-700">
+              <p className="text-gray-300 leading-relaxed text-lg mb-6">
+                I'm a passionate full-stack developer with expertise in modern web technologies. I
+                love creating immersive digital experiences that combine functionality with
                 beautiful design.
               </p>
-              <div className="flex flex-wrap gap-2">
-                {['React', 'TypeScript', 'Node.js', 'Python', 'Three.js'].map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 bg-white/20 rounded-full text-sm"
-                  >
+              <div className="flex flex-wrap gap-3">
+                {["React", "TypeScript", "Node.js", "Python", "Three.js"].map((skill) => (
+                  <span key={skill} className="px-4 py-2 bg-gray-700 text-gray-200 rounded-full text-sm border border-gray-600">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
-          )}
+          </div>
+        </section>
 
-          {activeSection === 'projects' && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Projects</h2>
-              <div className="space-y-4 max-h-96 overflow-y-auto">
-                {projects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="bg-white/10 rounded-lg p-4 hover:bg-white/20 transition-colors"
-                  >
-                    <h3 className="font-semibold text-lg">{project.title}</h3>
-                    <p className="text-gray-300 text-sm mt-1">{project.description}</p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-blue-500/30 rounded text-xs"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={project.link}
-                      className="inline-block mt-2 text-blue-400 hover:text-blue-300 text-sm"
-                    >
-                      View Project →
-                    </a>
-                  </div>
-                ))}
+        {/* Projects Section */}
+        <section id="projects" className="min-h-screen">
+          <h2 className="text-4xl font-bold mb-8 text-white">Projects</h2>
+          <div className="grid gap-6">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-gray-800/50 backdrop-blur-md rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors"
+              >
+                <h3 className="font-semibold text-2xl text-white mb-3">{project.title}</h3>
+                <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="px-3 py-1 bg-blue-900/50 text-blue-300 rounded border border-blue-800">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={project.link}
+                  className="inline-block text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  View Project →
+                </a>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="min-h-screen">
+          <h2 className="text-4xl font-bold mb-8 text-white">Skills</h2>
+          <div className="bg-gray-800/50 backdrop-blur-md rounded-lg p-8 border border-gray-700">
+            <div className="space-y-6">
+              {[
+                { name: "Frontend Development", level: 90 },
+                { name: "Backend Development", level: 85 },
+                { name: "3D Graphics", level: 75 },
+                { name: "UI/UX Design", level: 80 },
+                { name: "Mobile Development", level: 70 },
+              ].map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-lg font-medium text-white">{skill.name}</span>
+                    <span className="text-gray-400">{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-3 border border-gray-600">
+                    <div
+                      className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-1000"
+                      style={{ width: `${skill.level}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
+          </div>
+        </section>
 
-          {activeSection === 'skills' && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Skills</h2>
-              <div className="space-y-3">
-                {[
-                  { name: 'Frontend Development', level: 90 },
-                  { name: 'Backend Development', level: 85 },
-                  { name: '3D Graphics', level: 75 },
-                  { name: 'UI/UX Design', level: 80 },
-                  { name: 'Mobile Development', level: 70 }
-                ].map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-sm font-medium">{skill.name}</span>
-                      <span className="text-sm text-gray-300">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeSection === 'contact' && (
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Contact</h2>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">@</span>
+        {/* Contact Section */}
+        <section id="contact" className="min-h-screen flex items-center">
+          <div className="w-full">
+            <h2 className="text-4xl font-bold mb-8 text-white">Contact</h2>
+            <div className="bg-gray-800/50 backdrop-blur-md rounded-lg p-8 border border-gray-700">
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center border border-gray-600">
+                    <span className="text-gray-300 text-lg">@</span>
                   </div>
                   <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-gray-300 text-sm">your.email@example.com</p>
+                    <p className="font-medium text-white text-lg">Email</p>
+                    <p className="text-gray-400">your.email@example.com</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">in</span>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center border border-gray-600">
+                    <span className="text-gray-300 text-lg">in</span>
                   </div>
                   <div>
-                    <p className="font-medium">LinkedIn</p>
-                    <p className="text-gray-300 text-sm">linkedin.com/in/yourprofile</p>
+                    <p className="font-medium text-white text-lg">LinkedIn</p>
+                    <p className="text-gray-400">linkedin.com/in/yourprofile</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">gh</span>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center border border-gray-600">
+                    <span className="text-gray-300 text-lg">gh</span>
                   </div>
                   <div>
-                    <p className="font-medium">GitHub</p>
-                    <p className="text-gray-300 text-sm">github.com/yourusername</p>
+                    <p className="font-medium text-white text-lg">GitHub</p>
+                    <p className="text-gray-400">github.com/yourusername</p>
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-colors">
+              <button className="w-full mt-8 bg-gradient-to-r from-gray-700 to-gray-600 text-white py-3 px-6 rounded-lg hover:from-gray-600 hover:to-gray-500 transition-colors border border-gray-600">
                 Send Message
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        </section>
       </div>
 
       {/* Bottom Info */}
-      <div className="absolute bottom-6 left-6 pointer-events-auto">
-        <div className="bg-black/20 backdrop-blur-md rounded-lg p-4 text-white">
-          <p className="text-sm">
-            Use mouse to rotate • Hover over shapes for interaction
-          </p>
+      <div className="fixed bottom-6 left-6 z-40">
+        <div className="bg-gray-800/90 backdrop-blur-md rounded-lg p-4 text-gray-300 border border-gray-700">
+          <p className="text-sm">Use mouse to rotate • Hover over shapes for interaction</p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PortfolioSections
+export default PortfolioSections;
